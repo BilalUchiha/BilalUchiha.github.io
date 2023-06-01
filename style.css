@@ -1,0 +1,28 @@
+.title {
+  text-align: center;
+  color: cadetblue;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.myform {
+  border: solid 1px black;
+  margin-top: 10px;
+  padding: 9px;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  border: solid 2px gray;
+  margin: 4px;
+}
+.image {
+  width: 320px;
+  height: auto;
+  padding: 3px;
+}
+footer {
+  background-color: cornsilk;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+}
