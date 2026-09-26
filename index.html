@@ -1,170 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bilal's 3D Worlds</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(1200px 700px at 70% -10%,#1d2c33,#0d141a 60%);color:#ece7db;font-family:'DM Sans',sans-serif}
+main{width:min(860px,90vw);text-align:center;padding:60px 0}
+.kicker{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#c9a86a}
+h1{font:500 44px 'Cormorant Garamond',serif;margin:14px 0 6px}
+p.sub{color:#b9b3a5;font-size:13px;margin:0 0 44px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+a.card{display:block;padding:28px 22px;border:1px solid #ffffff1f;border-radius:6px;background:#121b23b8;text-decoration:none;color:inherit;transition:.25s}
+a.card:hover{transform:translateY(-3px);border-color:#c9a86a66;background:#16212b}
+.card .jp{font:400 26px 'Cormorant Garamond',serif;color:#d8bd8c}
+.card h2{font:500 19px 'Cormorant Garamond',serif;margin:8px 0 6px}
+.card span{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6}
+</style>
 </head>
-<body>
-    <div class="container">
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <h2><i class="fas fa-bolt"></i> AdminPanel</h2>
-                <button class="close-btn" id="closeSidebar"><i class="fas fa-times"></i></button>
-            </div>
-            <nav class="sidebar-nav">
-                <a href="#" class="nav-item active" data-page="dashboard">
-                    <i class="fas fa-home"></i> Dashboard
-                </a>
-                <a href="#" class="nav-item" data-page="users">
-                    <i class="fas fa-users"></i> Users
-                </a>
-                <a href="#" class="nav-item" data-page="analytics">
-                    <i class="fas fa-chart-line"></i> Analytics
-                </a>
-                <a href="#" class="nav-item" data-page="settings">
-                    <i class="fas fa-cog"></i> Settings
-                </a>
-            </nav>
-            <div class="sidebar-footer">
-                <a href="#" class="nav-item logout">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-            </div>
-        </aside>
-
-        <main class="main-content">
-            <header class="top-header">
-                <button class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="header-right">
-                    <button class="theme-toggle" id="themeToggle">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <div class="user-profile">
-                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff" alt="Admin">
-                        <span>Admin User</span>
-                    </div>
-                </div>
-            </header>
-
-            <div class="content-wrapper">
-                <div class="page-header">
-                    <h1>Dashboard Overview</h1>
-                    <p>Welcome back, here's what's happening today.</p>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon blue">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>1,254</h3>
-                            <p>Total Users</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon green">
-                            <i class="fas fa-dollar-sign"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>$45,231</h3>
-                            <p>Total Revenue</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon orange">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>345</h3>
-                            <p>New Orders</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon red">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>12</h3>
-                            <p>Pending Issues</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="charts-grid">
-                    <div class="chart-container">
-                        <h3>Revenue Analytics</h3>
-                        <canvas id="revenueChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <h3>User Demographics</h3>
-                        <canvas id="userChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="table-container">
-                    <div class="table-header">
-                        <h3>Recent Orders</h3>
-                        <button class="btn-primary">View All</button>
-                    </div>
-                    <div class="table-responsive">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Customer</th>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#ORD-001</td>
-                                    <td>John Doe</td>
-                                    <td>Oct 24, 2023</td>
-                                    <td>$120.50</td>
-                                    <td><span class="status-badge completed">Completed</span></td>
-                                    <td><button class="btn-sm">Details</button></td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-002</td>
-                                    <td>Jane Smith</td>
-                                    <td>Oct 24, 2023</td>
-                                    <td>$85.00</td>
-                                    <td><span class="status-badge pending">Pending</span></td>
-                                    <td><button class="btn-sm">Details</button></td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-003</td>
-                                    <td>Mike Johnson</td>
-                                    <td>Oct 23, 2023</td>
-                                    <td>$210.20</td>
-                                    <td><span class="status-badge cancelled">Cancelled</span></td>
-                                    <td><button class="btn-sm">Details</button></td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-004</td>
-                                    <td>Sarah Williams</td>
-                                    <td>Oct 23, 2023</td>
-                                    <td>$45.99</td>
-                                    <td><span class="status-badge completed">Completed</span></td>
-                                    <td><button class="btn-sm">Details</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+<body><main>
+<div class="kicker">Three.js experiments</div>
+<h1>Bilal's 3D Worlds</h1>
+<p class="sub">Three small interactive scenes — built with procedural geometry, rendered in your browser.</p>
+<div class="grid">
+<a class="card" href="garden/"><div class="jp">庭園</div><h2>The Quiet Garden</h2><span>Koi pond · tea house · torii</span></a>
+<a class="card" href="ramen/"><div class="jp">夜更けの麺</div><h2>Midnight Noodles</h2><span>Rainy alley · lantern light</span></a>
+<a class="card" href="observatory/"><div class="jp">星空</div><h2>The Quiet Observatory</h2><span>Summit dome · Milky Way</span></a>
+</div>
+</main></body></html>
